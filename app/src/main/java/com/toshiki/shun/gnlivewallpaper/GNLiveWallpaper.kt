@@ -1,13 +1,10 @@
 package com.toshiki.shun.gnlivewallpaper
 
-import android.graphics.Canvas
-import android.graphics.Rect
+import android.graphics.Color
 import android.graphics.Paint
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
-import android.util.Log
 import android.view.SurfaceHolder
-import java.io.File
 
 
 
@@ -82,7 +79,11 @@ class GNLiveWallpaper : WallpaperService() {
          * 画面に書き込みます。
          */
         private fun drawFrame() {
+            mPaint.color = Color.WHITE
             val canvas = surfaceHolder.lockCanvas()
+            canvas?.let { canvas.drawRect(300f, 300f, 600f, 600f, mPaint)
+                surfaceHolder.unlockCanvasAndPost(canvas)
+            }
             // 次の描画設定
             val delay = 1000L / FPS
             mHandler.removeCallbacks(mDrawRunnable)
