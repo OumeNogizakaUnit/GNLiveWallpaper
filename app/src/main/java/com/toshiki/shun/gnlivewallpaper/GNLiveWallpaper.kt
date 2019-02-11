@@ -19,7 +19,7 @@ class GNLiveWallpaper : WallpaperService() {
         /**
          * 描画間隔
          */
-        const val FPS = 30
+        const val FPS = 60
     }
 
     private val mHandler = Handler()
@@ -42,11 +42,11 @@ class GNLiveWallpaper : WallpaperService() {
          * ライブ壁紙が表示されているか
          */
         private var mVisible = false
+        /**
+         * 描画オブジェクト配列
+         */
+        private val items = ArrayList<GNObject>()
         private val mPaint = Paint()
-
-
-        init {
-        }
 
         override fun onSurfaceCreated(holder: SurfaceHolder?) {
             super.onSurfaceCreated(holder)
@@ -56,6 +56,14 @@ class GNLiveWallpaper : WallpaperService() {
             super.onSurfaceChanged(holder, format, width, height)
             mWidth = width
             mHeight = height
+            //items.add(GNCircle(mWidth / 2f,mHeight / 2f,mWidth / 4f))
+            var circle = GNRadarCircle(mWidth / 2f, mHeight / 2f, mWidth / 4f)
+            var circle_r = GNRadarCircle(mWidth / 2f, mHeight / 2f, mWidth / 4f)
+            circle.setV(1f)
+            circle_r.setV(-1.2f)
+            circle_r.setRadian(45f)
+            items.add(circle)
+            items.add(circle_r)
             drawFrame()
         }
 
@@ -81,7 +89,11 @@ class GNLiveWallpaper : WallpaperService() {
         private fun drawFrame() {
             mPaint.color = Color.WHITE
             val canvas = surfaceHolder.lockCanvas()
-            canvas?.let { canvas.drawRect(300f, 300f, 600f, 600f, mPaint)
+            canvas.drawColor(Color.WHITE)
+            canvas?.let {
+                for (item in items) {
+                    item.draw(canvas)
+                }
                 surfaceHolder.unlockCanvasAndPost(canvas)
             }
             // 次の描画設定
