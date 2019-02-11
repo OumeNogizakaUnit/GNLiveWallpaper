@@ -57,7 +57,13 @@ class GNLiveWallpaper : WallpaperService() {
             mWidth = width
             mHeight = height
             //items.add(GNCircle(mWidth / 2f,mHeight / 2f,mWidth / 4f))
-            items.add(GNRadarCircle(mWidth / 2f, mHeight / 2f, mWidth /4f))
+            var circle = GNRadarCircle(mWidth / 2f, mHeight / 2f, mWidth / 4f)
+            var circle_r = GNRadarCircle(mWidth / 2f, mHeight / 2f, mWidth / 4f)
+            circle.setV(1f)
+            circle_r.setV(-1.2f)
+            circle_r.setRadian(45f)
+            items.add(circle)
+            items.add(circle_r)
             drawFrame()
         }
 
