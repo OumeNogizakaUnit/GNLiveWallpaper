@@ -9,7 +9,7 @@
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme">
 
-        <service android:name="GNLWPService"
+        <service android:name=".GNLiveWallpaper"
                  android:label="@string/app_name"
                  android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>
@@ -17,7 +17,7 @@
                                 "android.service.wallpaper.WallpaperService" />
             </intent-filter>
             <meta-data android:name="android.service.wallpaper"
-                       android:resource="@xml/GNLWP" />
+                       android:resource="@xml/gnlwp" />
         </service>
 
     </application>
